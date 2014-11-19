@@ -1,14 +1,14 @@
-package br.org.furb.ws;
+package br.org.furb.ws.usuario;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 @WebService
-public class Usuario {
+public class UsuarioWS {
 
 	@WebMethod
-	public String hello(String nome) {
-		return "ola do servidor " + nome;
+	public String autenticar(String usuario, String senha) {		
+		return "autenticado ";		
 	}
 
 	@WebMethod

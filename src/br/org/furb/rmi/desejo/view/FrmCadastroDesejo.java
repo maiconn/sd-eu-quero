@@ -46,5 +46,9 @@ public class FrmCadastroDesejo extends JFrame {
 		JLabel lblTtulo = new JLabel("T\u00EDtulo");
 		lblTtulo.setBounds(10, 68, 46, 14);
 		contentPane.add(lblTtulo);
+		
+		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
+		lblDescrio.setBounds(10, 93, 46, 14);
+		contentPane.add(lblDescrio);
 	}
 }

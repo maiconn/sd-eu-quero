@@ -5,7 +5,7 @@ import java.util.Date;
 public class Desejo {
 	private int idDesejo;
 	private String titulo;
-	private String descrição;
+	private String descricao;
 	private String caminhoImagem;
 	private Date dataCriacao;
 	private Date dataTermino;
@@ -24,11 +24,11 @@ public class Desejo {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public String getDescrição() {
-		return descrição;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setDescrição(String descrição) {
-		this.descrição = descrição;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	public String getCaminhoImagem() {
 		return caminhoImagem;

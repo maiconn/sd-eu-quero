@@ -1,4 +1,4 @@
-package br.org.furb.rmi.desejo.view;
+package br.org.furb.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -50,5 +50,13 @@ public class FrmCadastroDesejo extends JFrame {
 		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
 		lblDescrio.setBounds(10, 93, 46, 14);
 		contentPane.add(lblDescrio);
+		
+		JLabel lblCategoria = new JLabel("Categoria");
+		lblCategoria.setBounds(0, 125, 71, 14);
+		contentPane.add(lblCategoria);
+		
+		JLabel lblDataDeTrmino = new JLabel("Data de término");
+		lblDataDeTrmino.setBounds(10, 150, 83, 14);
+		contentPane.add(lblDataDeTrmino);
 	}
 }

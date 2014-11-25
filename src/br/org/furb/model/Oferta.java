@@ -1,4 +1,4 @@
-package br.org.furb.rmi.oferta.model;
+package br.org.furb.model;
 
 import java.util.Date;
 

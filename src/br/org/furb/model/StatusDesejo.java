@@ -1,4 +1,4 @@
-package br.org.furb.rmi.desejo.model;
+package br.org.furb.model;
 
 public enum StatusDesejo {
 	ABERTO, EM_VOTACAO, CANCELADO, CONCLUIDO;

@@ -7,10 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 public class FrmCadastroDesejo extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField edTitulo;
+	private JTextField edDescricao;
+	private JTextField edCategoria;
+	private JTextField edDataTermino;
 
 	/**
 	 * Launch the application.
@@ -44,19 +51,47 @@ public class FrmCadastroDesejo extends JFrame {
 		contentPane.add(lblCadastroDeDesejos);
 		
 		JLabel lblTtulo = new JLabel("T\u00EDtulo");
-		lblTtulo.setBounds(10, 68, 46, 14);
+		lblTtulo.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTtulo.setBounds(80, 67, 46, 14);
 		contentPane.add(lblTtulo);
 		
 		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
-		lblDescrio.setBounds(10, 93, 46, 14);
+		lblDescrio.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDescrio.setBounds(80, 93, 46, 14);
 		contentPane.add(lblDescrio);
 		
 		JLabel lblCategoria = new JLabel("Categoria");
-		lblCategoria.setBounds(0, 125, 71, 14);
+		lblCategoria.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCategoria.setBounds(58, 119, 68, 14);
 		contentPane.add(lblCategoria);
 		
 		JLabel lblDataDeTrmino = new JLabel("Data de término");
-		lblDataDeTrmino.setBounds(10, 150, 83, 14);
+		lblDataDeTrmino.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDataDeTrmino.setBounds(35, 145, 91, 14);
 		contentPane.add(lblDataDeTrmino);
+		
+		edTitulo = new JTextField();
+		edTitulo.setBounds(134, 64, 86, 20);
+		contentPane.add(edTitulo);
+		edTitulo.setColumns(10);
+		
+		edDescricao = new JTextField();
+		edDescricao.setBounds(134, 90, 86, 20);
+		contentPane.add(edDescricao);
+		edDescricao.setColumns(10);
+		
+		edCategoria = new JTextField();
+		edCategoria.setBounds(134, 116, 86, 20);
+		contentPane.add(edCategoria);
+		edCategoria.setColumns(10);
+		
+		edDataTermino = new JTextField();
+		edDataTermino.setBounds(134, 142, 86, 20);
+		contentPane.add(edDataTermino);
+		edDataTermino.setColumns(10);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBounds(131, 173, 89, 23);
+		contentPane.add(btnSalvar);
 	}
 }

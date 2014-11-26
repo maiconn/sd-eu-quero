@@ -25,7 +25,7 @@ public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 
 	@Override
 	public String CriarDesejo() throws RemoteException {
-		return null;
+		return "Desejo criado com sucesso";
 	}
 	
 

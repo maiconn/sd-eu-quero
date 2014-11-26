@@ -2,6 +2,8 @@ package br.org.furb.controller.dao.util;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.Map;
@@ -10,9 +12,10 @@ import java.util.Map;
  *
  * @author Maicon
  */
-public abstract class MongoDBObject {
+public abstract class MongoDBObject implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    public BasicDBObject getBasicDBObject() throws Exception {
+	public BasicDBObject getBasicDBObject() throws Exception {
         BasicDBObject obj = new BasicDBObject();
 
         Field[] field = getClass().getDeclaredFields();
@@ -33,7 +36,8 @@ public abstract class MongoDBObject {
         return obj;
     }
 
-    public void convertDBObjectToObject(DBObject object) throws Exception {
+    @SuppressWarnings("rawtypes")
+	public void convertDBObjectToObject(DBObject object) throws Exception {
         Map objMap = object.toMap();
         for (Object nameField : objMap.keySet()) {
             if (nameField.toString().equals("_id")) {

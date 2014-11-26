@@ -4,6 +4,7 @@ import java.util.Date;
 
 import br.org.furb.controller.dao.util.MongoDBObject;
 
+@SuppressWarnings("serial")
 public class Oferta extends MongoDBObject {
 	private int id;
 	private String descricao;

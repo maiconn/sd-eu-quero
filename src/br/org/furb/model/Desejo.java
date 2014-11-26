@@ -4,6 +4,7 @@ import java.util.Date;
 
 import br.org.furb.controller.dao.util.MongoDBObject;
 
+@SuppressWarnings("serial")
 public class Desejo extends MongoDBObject {
 	private int idDesejo;
 	private String titulo;

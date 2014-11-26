@@ -2,6 +2,7 @@ package br.org.furb.model;
 
 import br.org.furb.controller.dao.util.MongoDBObject;
 
+@SuppressWarnings("serial")
 public class Usuario extends MongoDBObject {
 	
 	private int id;

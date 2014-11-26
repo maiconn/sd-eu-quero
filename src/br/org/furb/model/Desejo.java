@@ -2,7 +2,9 @@ package br.org.furb.model;
 
 import java.util.Date;
 
-public class Desejo {
+import br.org.furb.controller.dao.util.MongoDBObject;
+
+public class Desejo extends MongoDBObject {
 	private int idDesejo;
 	private String titulo;
 	private String descricao;

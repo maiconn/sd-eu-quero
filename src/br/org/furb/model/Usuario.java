@@ -1,6 +1,8 @@
 package br.org.furb.model;
 
-public class Usuario {
+import br.org.furb.controller.dao.util.MongoDBObject;
+
+public class Usuario extends MongoDBObject {
 	
 	private int id;
 	private String nome;

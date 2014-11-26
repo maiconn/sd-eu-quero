@@ -8,7 +8,7 @@ public class TesteUsuarioWS {
 		br.org.furb.ws.usuario.cliente.UsuarioWS port = new UsuarioWSService().getUsuarioWSPort();
 		System.out.println(port.autenticar("reinoldo", "123"));
 		System.out.println(port.buscar("reinoldo"));
-		System.out.println(port.buscarUser("reinoldo").getId());
+		System.out.println(port.buscarUser("reinoldo").getNome());
 	}
 	
 }

@@ -15,8 +15,8 @@ import java.sql.SQLException;
  */
 public class ConnectionMongoDB {
 
-    private static final String HOST = "192.168.25.29"; //"localhost";
-    private static final String DB_NAME = "venda_rapida";
+    private static final String HOST = "localhost";
+    private static final String DB_NAME = "eu_quero";
     private static final int PORT = 27017;
 
     public static DB getConnection() throws UnknownHostException {

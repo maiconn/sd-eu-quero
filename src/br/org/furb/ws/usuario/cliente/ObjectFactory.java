@@ -24,6 +24,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _BuscarUserResponse_QNAME = new QName("http://usuario.ws.furb.org.br/", "buscarUserResponse");
+    private final static QName _BuscarUser_QNAME = new QName("http://usuario.ws.furb.org.br/", "buscarUser");
     private final static QName _BuscarResponse_QNAME = new QName("http://usuario.ws.furb.org.br/", "buscarResponse");
     private final static QName _AutenticarResponse_QNAME = new QName("http://usuario.ws.furb.org.br/", "autenticarResponse");
     private final static QName _Autenticar_QNAME = new QName("http://usuario.ws.furb.org.br/", "autenticar");
@@ -34,6 +36,22 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link BuscarUserResponse }
+     * 
+     */
+    public BuscarUserResponse createBuscarUserResponse() {
+        return new BuscarUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link BuscarUser }
+     * 
+     */
+    public BuscarUser createBuscarUser() {
+        return new BuscarUser();
     }
 
     /**
@@ -74,6 +92,24 @@ public class ObjectFactory {
      */
     public Usuario createUsuario() {
         return new Usuario();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarUserResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://usuario.ws.furb.org.br/", name = "buscarUserResponse")
+    public JAXBElement<BuscarUserResponse> createBuscarUserResponse(BuscarUserResponse value) {
+        return new JAXBElement<BuscarUserResponse>(_BuscarUserResponse_QNAME, BuscarUserResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BuscarUser }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://usuario.ws.furb.org.br/", name = "buscarUser")
+    public JAXBElement<BuscarUser> createBuscarUser(BuscarUser value) {
+        return new JAXBElement<BuscarUser>(_BuscarUser_QNAME, BuscarUser.class, null, value);
     }
 
     /**

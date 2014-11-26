@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for buscarResponse complex type.
+ * <p>Java class for buscarUserResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="buscarResponse">
+ * &lt;complexType name="buscarUserResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://usuario.ws.furb.org.br/}usuario" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,23 +27,23 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "buscarResponse", propOrder = {
+@XmlType(name = "buscarUserResponse", propOrder = {
     "_return"
 })
-public class BuscarResponse {
+public class BuscarUserResponse {
 
     @XmlElement(name = "return")
-    protected String _return;
+    protected Usuario _return;
 
     /**
      * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Usuario }
      *     
      */
-    public String getReturn() {
+    public Usuario getReturn() {
         return _return;
     }
 
@@ -52,10 +52,10 @@ public class BuscarResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Usuario }
      *     
      */
-    public void setReturn(String value) {
+    public void setReturn(Usuario value) {
         this._return = value;
     }
 

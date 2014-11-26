@@ -7,20 +7,20 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "buscarResponse", namespace = "http://usuario.ws.furb.org.br/")
+@XmlRootElement(name = "buscarUserResponse", namespace = "http://usuario.ws.furb.org.br/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "buscarResponse", namespace = "http://usuario.ws.furb.org.br/")
-public class BuscarResponse {
+@XmlType(name = "buscarUserResponse", namespace = "http://usuario.ws.furb.org.br/")
+public class BuscarUserResponse {
 
     @XmlElement(name = "return", namespace = "")
-    private String _return;
+    private br.org.furb.model.Usuario _return;
 
     /**
      * 
      * @return
-     *     returns String
+     *     returns Usuario
      */
-    public String getReturn() {
+    public br.org.furb.model.Usuario getReturn() {
         return this._return;
     }
 
@@ -29,7 +29,7 @@ public class BuscarResponse {
      * @param _return
      *     the value for the _return property
      */
-    public void setReturn(String _return) {
+    public void setReturn(br.org.furb.model.Usuario _return) {
         this._return = _return;
     }
 

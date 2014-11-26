@@ -46,14 +46,29 @@ public interface UsuarioWS {
      * 
      * @param arg0
      * @return
-     *     returns br.org.furb.ws.usuario.cliente.Usuario
+     *     returns java.lang.String
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "buscar", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.Buscar")
     @ResponseWrapper(localName = "buscarResponse", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.BuscarResponse")
     @Action(input = "http://usuario.ws.furb.org.br/UsuarioWS/buscarRequest", output = "http://usuario.ws.furb.org.br/UsuarioWS/buscarResponse")
-    public Usuario buscar(
+    public String buscar(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns br.org.furb.ws.usuario.cliente.Usuario
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "buscarUser", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.BuscarUser")
+    @ResponseWrapper(localName = "buscarUserResponse", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.BuscarUserResponse")
+    @Action(input = "http://usuario.ws.furb.org.br/UsuarioWS/buscarUserRequest", output = "http://usuario.ws.furb.org.br/UsuarioWS/buscarUserResponse")
+    public Usuario buscarUser(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
 

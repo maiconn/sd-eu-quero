@@ -14,10 +14,18 @@ public class UsuarioWS {
 	}
 
 	@WebMethod
-	public Usuario buscar(String nome) {
+	public String buscar(String nome) {
 		Usuario user = new Usuario();
-		user.setNome("Tester1");
 		user.setId(99);
+		user.setNome("Bah");
+		return user.getNome();
+	}
+	
+	@WebMethod
+	public Usuario buscarUser(String nome) {
+		Usuario user = new Usuario();
+		user.setId(99);
+		user.setNome("Bah");
 		return user;
 	}
 

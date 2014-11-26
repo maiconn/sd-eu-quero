@@ -15,7 +15,7 @@ import br.org.furb.model.Usuario;
 
 public class UsuarioDaoImpl implements DAO<Usuario> {
 
-    private static final String TABELA = "oferta";
+    private static final String TABELA = "usuario";
 
     @Override
     public boolean salvar(Usuario usuario) throws Exception {
@@ -177,7 +177,7 @@ public class UsuarioDaoImpl implements DAO<Usuario> {
             conexao = ConnectionMongoDB.getConnection();
             DBCollection collection = conexao.getCollection(TABELA);
 
-            return ConnectionMongoDB.nextId(collection, "idDesejo");
+            return ConnectionMongoDB.nextId(collection, "id");
         } catch (Exception ex) {
             throw ex;
         } finally {

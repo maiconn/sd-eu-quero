@@ -190,7 +190,7 @@ public class OfertaDaoImpl implements DAO<Oferta> {
             conexao = ConnectionMongoDB.getConnection();
             DBCollection collection = conexao.getCollection(TABELA);
 
-            return ConnectionMongoDB.nextId(collection, "idDesejo");
+            return ConnectionMongoDB.nextId(collection, "id");
         } catch (Exception ex) {
             throw ex;
         } finally {

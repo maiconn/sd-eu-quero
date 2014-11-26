@@ -5,8 +5,6 @@ import java.rmi.server.*;
 
 import br.org.furb.util.Constantes;
 
-import com.sun.org.apache.bcel.internal.Constants;
-
 public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 
 	protected DesejoServer() throws RemoteException {

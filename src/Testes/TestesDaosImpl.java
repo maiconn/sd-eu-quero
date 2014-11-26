@@ -4,12 +4,16 @@ import java.util.Date;
 
 import br.org.furb.controller.dao.DAO;
 import br.org.furb.controller.dao.impl.DesejoDaoImpl;
+import br.org.furb.controller.dao.impl.NotificacaoDaoImpl;
 import br.org.furb.controller.dao.impl.OfertaDaoImpl;
 import br.org.furb.controller.dao.impl.UsuarioDaoImpl;
 import br.org.furb.model.Desejo;
+import br.org.furb.model.Notificacao;
 import br.org.furb.model.Oferta;
 import br.org.furb.model.StatusDesejo;
+import br.org.furb.model.StatusNotificacao;
 import br.org.furb.model.StatusOferta;
+import br.org.furb.model.TipoNotificacao;
 import br.org.furb.model.Usuario;
 
 public class TestesDaosImpl {
@@ -98,6 +102,24 @@ public class TestesDaosImpl {
 		desejo.setDataTermino(new Date("10/01/2014"));
 		desejo.setStatus(StatusDesejo.ABERTO);
 		desejoDaoImpl.editar(desejo);*/
+		
+		Notificacao notificacao = new Notificacao();
+		DAO<Notificacao> notificacaoDaoImpl = new NotificacaoDaoImpl();
+		
+		/*notificacao.setId(notificacaoDaoImpl.incrementar());
+		notificacao.setDescricao("Oferta feita");
+		notificacao.setTipoNotificacao(TipoNotificacao.OFERTA);
+		notificacao.setStatus(StatusNotificacao.ENVIADA);
+		notificacaoDaoImpl.salvar(notificacao);*/
+		
+		//notificacao.setId(5);
+		//notificacaoDaoImpl.excluir(notificacao);
+		
+		/*notificacao.setId(3);
+		notificacao.setDescricao("Participante entrou");
+		notificacao.setTipoNotificacao(TipoNotificacao.DESEJO);
+		notificacao.setStatus(StatusNotificacao.VISUALIZADA);
+		notificacaoDaoImpl.editar(notificacao);*/
 	}
 
 }

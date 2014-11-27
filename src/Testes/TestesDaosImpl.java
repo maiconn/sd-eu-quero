@@ -80,15 +80,17 @@ public class TestesDaosImpl {
 		Desejo desejo = new Desejo();
 		DAO<Desejo> desejoDaoImpl = new DesejoDaoImpl();
 		
-		/*desejo.setIdDesejo(desejoDaoImpl.incrementar());
-		desejo.setTitulo("Ônibus ou Goiaba");
-		desejo.setDescricao("Será que eu pego o ônibus ou eu compro a goiaba?");
-		desejo.setCaminhoImagem("/home/ManoDaQuebrada/duvida.gif");
-		desejo.setCategoria("Zoeira");
-		desejo.setDataCriacao(new Date("31/11/2014"));
-		desejo.setDataTermino(new Date("02/01/2015"));
-		desejo.setStatus(StatusDesejo.EM_VOTACAO);
-		desejoDaoImpl.salvar(desejo);*/
+//		desejo.setIdDesejo(desejoDaoImpl.incrementar());
+//		desejo.setTitulo("Ônibus ou Goiaba");
+//		desejo.setDescricao("Será que eu pego o ônibus ou eu compro a goiaba?");
+//		desejo.setCaminhoImagem("/home/ManoDaQuebrada/duvida.gif");
+//		desejo.setCategoria("Zoeira");
+//		desejo.setDataCriacao(new Date("31/11/2014"));
+//		desejo.setDataTermino(new Date("02/01/2015"));
+//		desejo.setStatus(StatusDesejo.EM_VOTACAO);
+//		desejoDaoImpl.salvar(desejo);
+		
+		desejoDaoImpl.listar();
 		
 		//desejo.setIdDesejo(4);
 		//desejoDaoImpl.excluir(desejo);

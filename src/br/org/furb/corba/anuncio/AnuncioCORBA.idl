@@ -1,0 +1,11 @@
+module _anuncio {
+
+
+  interface AnuncioInterface {
+
+    string getAnuncios(in long idUsuario);
+
+  };
+
+
+};

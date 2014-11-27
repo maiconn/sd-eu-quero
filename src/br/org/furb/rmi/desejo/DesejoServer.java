@@ -5,6 +5,7 @@ import java.rmi.server.*;
 
 import br.org.furb.util.Constantes;
 
+@SuppressWarnings("serial")
 public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 
 	protected DesejoServer() throws RemoteException {

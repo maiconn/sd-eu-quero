@@ -67,23 +67,27 @@ public class FrmPrincipal extends JFrame {
 		btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new DlgUsuario().setVisible(true);
+				if (btnLogin.getText().equals("Login")) {
+					new DlgUsuario().setVisible(true);
+				} else {
+					Sessao.getInstance().setUsuario(null);
+				}
 				verificaUsuario();
 			}
 		});
-		btnLogin.setBounds(492, 7, 57, 23);
+		btnLogin.setBounds(474, 7, 75, 23);
 		panel.add(btnLogin);
 
 		btnMeusDesejos = new JButton("Meus Desejos");
-		btnMeusDesejos.setBounds(383, 7, 99, 23);
+		btnMeusDesejos.setBounds(365, 7, 99, 23);
 		panel.add(btnMeusDesejos);
 
 		btnMinhasOfertas = new JButton("Minhas Ofertas");
-		btnMinhasOfertas.setBounds(267, 7, 114, 23);
+		btnMinhasOfertas.setBounds(249, 7, 114, 23);
 		panel.add(btnMinhasOfertas);
 
 		lblUsuariologado = new JLabel("USUARIO_LOGADO");
-		lblUsuariologado.setBounds(32, 33, 114, 14);
+		lblUsuariologado.setBounds(32, 33, 331, 14);
 		panel.add(lblUsuariologado);
 
 		JLabel lblOl = new JLabel("Olá");
@@ -91,7 +95,7 @@ public class FrmPrincipal extends JFrame {
 		panel.add(lblOl);
 
 		btnNotificaes = new JButton("Notificações");
-		btnNotificaes.setBounds(165, 7, 99, 23);
+		btnNotificaes.setBounds(147, 7, 99, 23);
 		panel.add(btnNotificaes);
 
 		JPanel panel_1 = new JPanel();
@@ -133,12 +137,13 @@ public class FrmPrincipal extends JFrame {
 
 	public void verificaUsuario() {
 		Usuario usuarioLogado = Sessao.getInstance().getUsuario();
-		lblUsuariologado.setText(usuarioLogado == null ? "" : usuarioLogado.getNome());
+		lblUsuariologado.setText(usuarioLogado == null ? "" : usuarioLogado
+				.getNome());
 		btnLogin.setText(usuarioLogado == null ? "Login" : "Logoff");
 		btnMeusDesejos.setVisible(usuarioLogado != null);
 		btnMinhasOfertas.setVisible(usuarioLogado != null);
 		btnNotificaes.setVisible(usuarioLogado != null);
-		
+
 		// TODO VERIFICAR ANUNCIOS...
 	}
 }

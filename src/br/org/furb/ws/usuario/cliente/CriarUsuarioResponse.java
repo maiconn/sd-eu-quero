@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for autenticarResponse complex type.
+ * <p>Java class for criarUsuarioResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="autenticarResponse">
+ * &lt;complexType name="criarUsuarioResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://usuario.ws.furb.org.br/}usuario" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,35 +27,27 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "autenticarResponse", propOrder = {
+@XmlType(name = "criarUsuarioResponse", propOrder = {
     "_return"
 })
-public class AutenticarResponse {
+public class CriarUsuarioResponse {
 
     @XmlElement(name = "return")
-    protected Usuario _return;
+    protected boolean _return;
 
     /**
      * Gets the value of the return property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Usuario }
-     *     
      */
-    public Usuario getReturn() {
+    public boolean isReturn() {
         return _return;
     }
 
     /**
      * Sets the value of the return property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Usuario }
-     *     
      */
-    public void setReturn(Usuario value) {
+    public void setReturn(boolean value) {
         this._return = value;
     }
 

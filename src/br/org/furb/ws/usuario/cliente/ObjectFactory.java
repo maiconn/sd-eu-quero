@@ -25,10 +25,13 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _BuscarUserResponse_QNAME = new QName("http://usuario.ws.furb.org.br/", "buscarUserResponse");
+    private final static QName _Exception_QNAME = new QName("http://usuario.ws.furb.org.br/", "Exception");
     private final static QName _BuscarUser_QNAME = new QName("http://usuario.ws.furb.org.br/", "buscarUser");
     private final static QName _BuscarResponse_QNAME = new QName("http://usuario.ws.furb.org.br/", "buscarResponse");
     private final static QName _AutenticarResponse_QNAME = new QName("http://usuario.ws.furb.org.br/", "autenticarResponse");
     private final static QName _Autenticar_QNAME = new QName("http://usuario.ws.furb.org.br/", "autenticar");
+    private final static QName _CriarUsuario_QNAME = new QName("http://usuario.ws.furb.org.br/", "criarUsuario");
+    private final static QName _CriarUsuarioResponse_QNAME = new QName("http://usuario.ws.furb.org.br/", "criarUsuarioResponse");
     private final static QName _Buscar_QNAME = new QName("http://usuario.ws.furb.org.br/", "buscar");
 
     /**
@@ -44,6 +47,14 @@ public class ObjectFactory {
      */
     public BuscarUserResponse createBuscarUserResponse() {
         return new BuscarUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link Exception }
+     * 
+     */
+    public Exception createException() {
+        return new Exception();
     }
 
     /**
@@ -79,6 +90,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CriarUsuario }
+     * 
+     */
+    public CriarUsuario createCriarUsuario() {
+        return new CriarUsuario();
+    }
+
+    /**
+     * Create an instance of {@link CriarUsuarioResponse }
+     * 
+     */
+    public CriarUsuarioResponse createCriarUsuarioResponse() {
+        return new CriarUsuarioResponse();
+    }
+
+    /**
      * Create an instance of {@link Buscar }
      * 
      */
@@ -101,6 +128,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://usuario.ws.furb.org.br/", name = "buscarUserResponse")
     public JAXBElement<BuscarUserResponse> createBuscarUserResponse(BuscarUserResponse value) {
         return new JAXBElement<BuscarUserResponse>(_BuscarUserResponse_QNAME, BuscarUserResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Exception }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://usuario.ws.furb.org.br/", name = "Exception")
+    public JAXBElement<Exception> createException(Exception value) {
+        return new JAXBElement<Exception>(_Exception_QNAME, Exception.class, null, value);
     }
 
     /**
@@ -137,6 +173,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://usuario.ws.furb.org.br/", name = "autenticar")
     public JAXBElement<Autenticar> createAutenticar(Autenticar value) {
         return new JAXBElement<Autenticar>(_Autenticar_QNAME, Autenticar.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CriarUsuario }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://usuario.ws.furb.org.br/", name = "criarUsuario")
+    public JAXBElement<CriarUsuario> createCriarUsuario(CriarUsuario value) {
+        return new JAXBElement<CriarUsuario>(_CriarUsuario_QNAME, CriarUsuario.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CriarUsuarioResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://usuario.ws.furb.org.br/", name = "criarUsuarioResponse")
+    public JAXBElement<CriarUsuarioResponse> createCriarUsuarioResponse(CriarUsuarioResponse value) {
+        return new JAXBElement<CriarUsuarioResponse>(_CriarUsuarioResponse_QNAME, CriarUsuarioResponse.class, null, value);
     }
 
     /**

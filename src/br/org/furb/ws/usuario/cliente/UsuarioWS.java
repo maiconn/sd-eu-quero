@@ -7,6 +7,7 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.Action;
+import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -29,18 +30,23 @@ public interface UsuarioWS {
      * @param arg1
      * @param arg0
      * @return
-     *     returns java.lang.String
+     *     returns br.org.furb.ws.usuario.cliente.Usuario
+     * @throws Exception_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "autenticar", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.Autenticar")
     @ResponseWrapper(localName = "autenticarResponse", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.AutenticarResponse")
-    @Action(input = "http://usuario.ws.furb.org.br/UsuarioWS/autenticarRequest", output = "http://usuario.ws.furb.org.br/UsuarioWS/autenticarResponse")
-    public String autenticar(
+    @Action(input = "http://usuario.ws.furb.org.br/UsuarioWS/autenticarRequest", output = "http://usuario.ws.furb.org.br/UsuarioWS/autenticarResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://usuario.ws.furb.org.br/UsuarioWS/autenticar/Fault/Exception")
+    })
+    public Usuario autenticar(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0,
         @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
+        String arg1)
+        throws Exception_Exception
+    ;
 
     /**
      * 
@@ -71,5 +77,25 @@ public interface UsuarioWS {
     public Usuario buscarUser(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "criarUsuario", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.CriarUsuario")
+    @ResponseWrapper(localName = "criarUsuarioResponse", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.CriarUsuarioResponse")
+    @Action(input = "http://usuario.ws.furb.org.br/UsuarioWS/criarUsuarioRequest", output = "http://usuario.ws.furb.org.br/UsuarioWS/criarUsuarioResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://usuario.ws.furb.org.br/UsuarioWS/criarUsuario/Fault/Exception")
+    })
+    public boolean criarUsuario(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Usuario arg0)
+        throws Exception_Exception
+    ;
 
 }

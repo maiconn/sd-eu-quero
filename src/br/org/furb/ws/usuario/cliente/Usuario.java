@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="usuario">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://usuario.ws.furb.org.br/}mongoDBObject">
  *       &lt;sequence>
  *         &lt;element name="cep" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="senha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="telefone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -39,7 +39,9 @@ import javax.xml.bind.annotation.XmlType;
     "senha",
     "telefone"
 })
-public class Usuario {
+public class Usuario
+    extends MongoDBObject
+{
 
     protected int cep;
     protected String email;

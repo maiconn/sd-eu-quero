@@ -23,7 +23,7 @@ public class UsuarioDaoImpl implements DAO<Usuario> {
         try {
             conexao = ConnectionMongoDB.getConnection();
             DBCollection collection = conexao.getCollection(TABELA);
-
+            usuario.setId(incrementar());
             collection.insert(usuario.getBasicDBObject());
 
             return true;

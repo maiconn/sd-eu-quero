@@ -6,6 +6,11 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import br.org.furb.controller.NotificacaoController;
+import br.org.furb.model.Notificacao;
+import br.org.furb.model.Sessao;
+import br.org.furb.model.Usuario;
+
 @SuppressWarnings("serial")
 public class DlgNotificacoes extends JDialog {
 	final DefaultListModel model = new DefaultListModel();
@@ -32,8 +37,10 @@ public class DlgNotificacoes extends JDialog {
 	public void buscarNotificacoes() throws Exception {
 		model.clear();
 		
-		//TODO adicionar notificações aqui
-		String strTemp = "";
+		NotificacaoController notificacaoController = new NotificacaoController();
+		Usuario usuarioLogado = Sessao.getInstance().getUsuario();
+		
+		String strTemp = notificacaoController.getNotificacoes(usuarioLogado.getId());
 		for( String str: strTemp.split(";")){
 			model.addElement(str);
 		}

@@ -34,6 +34,7 @@ public class UsuarioController {
 		usuarioWS.setNome(usuario.getNome());
 		usuarioWS.setSenha(usuario.getSenha());
 		usuarioWS.setTelefone(usuario.getTelefone());
+		usuarioWS.setGostos(usuario.getGostos());
 		
 		return usuarioClient.getUsuarioClient().criarUsuario(usuarioWS);
 	}
@@ -55,3 +56,4 @@ public class UsuarioController {
 		
 	}
 }
+

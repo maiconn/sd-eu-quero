@@ -28,12 +28,9 @@ public class UsuarioWS {
 	public Usuario buscar(int id) throws Exception {
 		UsuarioDaoImpl dao = new UsuarioDaoImpl();
 		Usuario usuario = new Usuario();
-		usuario.setId(id);
-		List<Usuario> find = dao.listar(usuario, null);
-		if(find.isEmpty()){
-			return null;
-		}
-		return find.get(0);
+		usuario.setId(id);		
+		
+		return dao.buscar(usuario);
 	}
 	
 	@WebMethod

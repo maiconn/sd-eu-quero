@@ -11,18 +11,16 @@ public class AnuncioImpl extends AnuncioInterfacePOA {
 	@Override
 	public String getAnuncios(int idUsuario) {		
 
-		Usuario usuario = null;
-		
+		Usuario usuario = null;		
 		
 		try {
 			
 			// Busca gostos do usuário
-			usuario = new UsuarioController().buscar(idUsuario);		
-			
-			AnuncioListas al = new AnuncioListas();
+			usuario = new UsuarioController().buscar(idUsuario);								
+			AnuncioListas al = new AnuncioListas();			
 			
 			// Busca por anuncios referentes aos gostos
-			if (usuario.getGostos()!=null && !usuario.getGostos().isEmpty()){
+			if (usuario != null && usuario.getGostos()!=null && !usuario.getGostos().isEmpty()){
 				String[] gostos = usuario.getGostos().split(";");
 				String anuncios = "";
 				
@@ -48,6 +46,7 @@ public class AnuncioImpl extends AnuncioInterfacePOA {
 		} catch (Exception_Exception e) {
 			e.printStackTrace();
 		}
+		
 		
 		return "";
 	}

@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import _notificacao.NotificacaoInterfacePOA;
+import br.org.furb.controller.DesejoController;
+import br.org.furb.controller.OfertaController;
+import br.org.furb.controller.UsuarioController;
 import br.org.furb.controller.dao.impl.NotificacaoDaoImpl;
+import br.org.furb.model.Desejo;
 import br.org.furb.model.Notificacao;
+import br.org.furb.model.Oferta;
 import br.org.furb.model.TipoNotificacao;
+import br.org.furb.model.Usuario;
 
 public class NotificacaoImpl extends NotificacaoInterfacePOA{
 
@@ -52,9 +58,28 @@ public class NotificacaoImpl extends NotificacaoInterfacePOA{
 			notificacao.setTipoNotificacao(tipo);
 			
 			if (tipo == TipoNotificacao.DESEJO){
-				descricao = "O desejo " + idDesejoOferta + " foi criado com sucesso";
+				
+				DesejoController desejoController = new DesejoController();
+				Desejo desejo = new Desejo();
+				desejo.setIdDesejo(idDesejoOferta);
+				desejoController.buscar(desejo);
+				
+				descricao = "Seu desejo '" + desejo.getDescricao()+ "' foi criado com sucesso. Compartilhe com seus amigos.";
 			}else if (tipo == TipoNotificacao.OFERTA){
-				descricao = "A oferta " + idDesejoOferta + " foi criada com sucesso";
+				OfertaController ofertaController = new OfertaController();				
+				Oferta oferta = new Oferta();				
+				oferta.setId(idDesejoOferta);
+				ofertaController.buscar(oferta);
+				
+				DesejoController desejoController = new DesejoController();
+				Desejo desejo = new Desejo();
+				desejo.setIdDesejo(oferta.getIdDesejo());
+				desejoController.buscar(desejo);
+				
+				UsuarioController usuarioController = new UsuarioController();
+				Usuario usuario = usuarioController.buscar(oferta.getIdUsuario());
+				
+				descricao = "Seu desejo " + desejo.getDescricao() + " foi ofertado por " + usuario.getNome();
 			}else{
 				descricao = "Notificação não identificada " + tipoNotificacao;
 			}	

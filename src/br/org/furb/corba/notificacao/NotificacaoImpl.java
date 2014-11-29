@@ -47,24 +47,19 @@ public class NotificacaoImpl extends NotificacaoInterfacePOA{
 		TipoNotificacao tipo = TipoNotificacao.values()[tipoNotificacao];
 		String descricao = "";
 		
-		System.out.println(tipo.toString());
+		System.out.println(tipo.toString());		
 		
-		Notificacao notificacao = new Notificacao();
-		
-		try {
-			
-			notificacao.setId(dao.incrementar());
-			notificacao.setIdUsuario(idUsuario);
-			notificacao.setTipoNotificacao(tipo);
-			
+		try {			
+						
 			if (tipo == TipoNotificacao.DESEJO){
 				
 				DesejoController desejoController = new DesejoController();
 				Desejo desejo = new Desejo();
 				desejo.setIdDesejo(idDesejoOferta);
 				desejoController.buscar(desejo);
-				if (desejo!=null)
+				if (desejo!=null){					
 					descricao = "Seu desejo '" + desejo.getDescricao()+ "' foi criado com sucesso. Compartilhe com seus amigos.";
+				}	
 				
 			}else if (tipo == TipoNotificacao.OFERTA){
 				OfertaController ofertaController = new OfertaController();				
@@ -78,20 +73,30 @@ public class NotificacaoImpl extends NotificacaoInterfacePOA{
 					desejo.setIdDesejo(oferta.getIdDesejo());
 					desejoController.buscar(desejo);
 					
-					UsuarioController usuarioController = new UsuarioController();
-					Usuario usuario = usuarioController.buscar(oferta.getIdUsuario());
-					
-					descricao = "Seu desejo " + desejo.getDescricao() + " foi ofertado por " + usuario.getNome();
+					if (desejo != null){
+						idUsuario = desejo.getIdUsuario();
+						UsuarioController usuarioController = new UsuarioController();
+						Usuario usuario = usuarioController.buscar(oferta.getIdUsuario());
+						
+						descricao = "Seu desejo " + desejo.getDescricao() + " foi ofertado por " + usuario.getNome();
+					}
 				}
 			}else{
 				descricao = "Notificação não identificada " + tipoNotificacao;
 			}	
 			
-			notificacao.setDescricao(descricao);		
-			//notificacao.setStatus("");		
-		
-			dao.salvar(notificacao);
+			if (!descricao.isEmpty()) {
+				
+				Notificacao notificacao = new Notificacao();
+				notificacao.setId(dao.incrementar());
+				notificacao.setIdUsuario(idUsuario);
+				notificacao.setTipoNotificacao(tipo);
+				notificacao.setDescricao(descricao);		
+				//notificacao.setStatus("");		
 			
+				dao.salvar(notificacao);
+				
+			}						
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}

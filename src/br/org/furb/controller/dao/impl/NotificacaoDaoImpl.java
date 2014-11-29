@@ -87,6 +87,10 @@ public class NotificacaoDaoImpl implements DAO<Notificacao> {
                 if (notificacaoInicial.getId() > 0) {
                     filtro.put("id", notificacaoInicial.getId());
                 }
+                
+                if (notificacaoInicial.getIdUsuario() > 0) {
+                    filtro.put("idUsuario", notificacaoInicial.getIdUsuario());
+                }
 
                 if (notificacaoInicial.getDescricao() != null) {
                     filtro.put("descricao", java.util.regex.Pattern.compile(notificacaoInicial.getDescricao()));

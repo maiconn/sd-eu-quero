@@ -13,6 +13,7 @@ public class AnuncioImpl extends AnuncioInterfacePOA {
 
 		Usuario usuario = null;
 		
+		
 		try {
 			
 			// Busca gostos do usuário
@@ -21,11 +22,28 @@ public class AnuncioImpl extends AnuncioInterfacePOA {
 			AnuncioListas al = new AnuncioListas();
 			
 			// Busca por anuncios referentes aos gostos
-			if (al.getListaDefault().containsKey(usuario.getGostos())){
-				return al.getListaDefault().get(usuario.getGostos());				
-			} 
-			
-			return al.getListaDefault().get("padrão");
+			if (usuario.getGostos()!=null && !usuario.getGostos().isEmpty()){
+				String[] gostos = usuario.getGostos().split(";");
+				String anuncios = "";
+				
+				// Concatenas vários gostos
+				for (int i = 0; i < gostos.length; i++) {
+					
+					if (al.getListaDefault().containsKey(gostos[i])){
+						anuncios = anuncios + al.getListaDefault().get(gostos[i]) + ";";				
+					}
+					
+				}
+				
+				// Se não encontrar nenhum gosto retorna o padrão
+				if (anuncios.isEmpty()) 
+					return al.getListaDefault().get("padrão");
+				else
+					return anuncios;
+				
+			}else{
+				return al.getListaDefault().get("padrão");
+			}
 			
 		} catch (Exception_Exception e) {
 			e.printStackTrace();

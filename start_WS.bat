@@ -7,4 +7,3 @@ cd ..\bin
 start java br.org.furb.ws.usuario.UsuarioPublicaService
 cd ..\src
 wsimport -keep -p br.org.furb.ws.usuario.cliente http://localhost/usuario?wsdl
-pause

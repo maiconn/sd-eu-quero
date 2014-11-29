@@ -5,19 +5,23 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import br.org.furb.controller.NotificacaoController;
 import br.org.furb.controller.dao.DAO;
 import br.org.furb.controller.dao.impl.OfertaDaoImpl;
 import br.org.furb.model.Oferta;
+import br.org.furb.model.TipoNotificacao;
 import br.org.furb.util.Constantes;
 
 public class OfertaServer extends UnicastRemoteObject implements OfertaRMI {
 	private static final long serialVersionUID = 1L;
 
 	DAO<Oferta> ofertaDaoImpl;
+	NotificacaoController notificacaoController;
 	
 	public OfertaServer() throws RemoteException {
 		super();
 		ofertaDaoImpl = new OfertaDaoImpl(); 
+		notificacaoController = new NotificacaoController();
 	}
 
 	// main()
@@ -36,7 +40,7 @@ public class OfertaServer extends UnicastRemoteObject implements OfertaRMI {
 		if (oferta.getId() == 0)
 			oferta.setId(ofertaDaoImpl.incrementar());
 		ofertaDaoImpl.salvar(oferta);
-		System.out.println("oferta criada com sucesso!!!!!! _id:" + oferta.getId());
+		notificacaoController.criarNotificacao(oferta.getId(), TipoNotificacao.OFERTA.ordinal(), oferta.getId());
 	}
 
 	@Override

@@ -1,30 +1,33 @@
 package br.org.furb.rmi.desejo;
 
 import java.net.MalformedURLException;
-import java.rmi.*;
-import java.rmi.server.*;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import br.org.furb.controller.DesejoController;
+import br.org.furb.controller.NotificacaoController;
 import br.org.furb.controller.OfertaController;
 import br.org.furb.controller.UsuarioController;
 import br.org.furb.controller.dao.DAO;
 import br.org.furb.controller.dao.impl.DesejoDaoImpl;
-import br.org.furb.controller.dao.impl.OfertaDaoImpl;
 import br.org.furb.model.Desejo;
 import br.org.furb.model.Oferta;
+import br.org.furb.model.TipoNotificacao;
 import br.org.furb.util.Constantes;
 
 @SuppressWarnings("serial")
 public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 
 	DAO<Desejo> desejoDaoImpl;
+	NotificacaoController notificacaoController;
 	
 	protected DesejoServer() throws RemoteException, MalformedURLException, NotBoundException {
 		super();
 		desejoDaoImpl = new DesejoDaoImpl();
+		notificacaoController = new NotificacaoController();
 	}
 	
 	public static void main(String[] args) {
@@ -44,6 +47,7 @@ public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 			if (desejo.getIdDesejo() == 0)
 				desejo.setIdDesejo(desejoDaoImpl.incrementar());
 			desejoDaoImpl.salvar(desejo);
+			notificacaoController.criarNotificacao(desejo.getIdUsuario(), TipoNotificacao.DESEJO.ordinal(), desejo.getIdDesejo());
 		} catch (Exception e) {
 			return e.getMessage();
 		}

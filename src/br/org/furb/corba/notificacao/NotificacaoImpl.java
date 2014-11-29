@@ -63,23 +63,26 @@ public class NotificacaoImpl extends NotificacaoInterfacePOA{
 				Desejo desejo = new Desejo();
 				desejo.setIdDesejo(idDesejoOferta);
 				desejoController.buscar(desejo);
+				if (desejo!=null)
+					descricao = "Seu desejo '" + desejo.getDescricao()+ "' foi criado com sucesso. Compartilhe com seus amigos.";
 				
-				descricao = "Seu desejo '" + desejo.getDescricao()+ "' foi criado com sucesso. Compartilhe com seus amigos.";
 			}else if (tipo == TipoNotificacao.OFERTA){
 				OfertaController ofertaController = new OfertaController();				
 				Oferta oferta = new Oferta();				
 				oferta.setId(idDesejoOferta);
 				ofertaController.buscar(oferta);
 				
-				DesejoController desejoController = new DesejoController();
-				Desejo desejo = new Desejo();
-				desejo.setIdDesejo(oferta.getIdDesejo());
-				desejoController.buscar(desejo);
-				
-				UsuarioController usuarioController = new UsuarioController();
-				Usuario usuario = usuarioController.buscar(oferta.getIdUsuario());
-				
-				descricao = "Seu desejo " + desejo.getDescricao() + " foi ofertado por " + usuario.getNome();
+				if (oferta!=null){
+					DesejoController desejoController = new DesejoController();
+					Desejo desejo = new Desejo();
+					desejo.setIdDesejo(oferta.getIdDesejo());
+					desejoController.buscar(desejo);
+					
+					UsuarioController usuarioController = new UsuarioController();
+					Usuario usuario = usuarioController.buscar(oferta.getIdUsuario());
+					
+					descricao = "Seu desejo " + desejo.getDescricao() + " foi ofertado por " + usuario.getNome();
+				}
 			}else{
 				descricao = "Notificação não identificada " + tipoNotificacao;
 			}	

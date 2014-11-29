@@ -12,6 +12,7 @@ import br.org.furb.controller.OfertaController;
 import br.org.furb.controller.UsuarioController;
 import br.org.furb.controller.dao.DAO;
 import br.org.furb.controller.dao.impl.DesejoDaoImpl;
+import br.org.furb.controller.dao.impl.OfertaDaoImpl;
 import br.org.furb.model.Desejo;
 import br.org.furb.model.Oferta;
 import br.org.furb.util.Constantes;
@@ -80,6 +81,13 @@ public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 
 	@Override
 	public boolean excluir(Desejo desejo) throws Exception {
+		Oferta ofertaInicial = new Oferta();
+		OfertaController ofertaController = new OfertaController();
+		ofertaInicial.setIdDesejo(desejo.getIdDesejo());
+		List<Oferta> listaOfertas = ofertaController.listar(ofertaInicial, null);
+		for (Oferta oferta : listaOfertas) {
+			ofertaController.excluir(oferta);
+		}
 		return desejoDaoImpl.excluir(desejo);
 	}
 

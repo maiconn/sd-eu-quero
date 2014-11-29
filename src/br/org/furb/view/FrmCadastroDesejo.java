@@ -1,16 +1,16 @@
 package br.org.furb.view;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,6 +32,7 @@ public class FrmCadastroDesejo extends JDialog {
 	private JTextField edCategoria;
 	private JTextField edDataTermino;
 	private DesejoController desejoController;
+	private JTextField edIdDesejo;
 
 	/**
 	 * Launch the application.
@@ -47,7 +48,37 @@ public class FrmCadastroDesejo extends JDialog {
 				}
 			}
 		});
-	} */
+	}*/
+	
+	private void carregarDesejo() {
+		if (Integer.parseInt(edIdDesejo.getText()) == 0) {
+			limparCampos();
+		} else {
+			Desejo desejo = new Desejo();
+			desejo.setIdDesejo(Integer.parseInt(edIdDesejo.getText()));
+			try {
+				desejo = desejoController.buscar(desejo);
+				if (desejo != null) {
+					limparCampos();
+					edIdDesejo.setText(String.valueOf(desejo.getIdDesejo()));
+					edCategoria.setText(desejo.getCategoria());
+					edDataTermino.setText(new SimpleDateFormat("dd/MM/yyyy").format(desejo.getDataTermino()));
+					edDescricao.setText(desejo.getDescricao());
+					edTitulo.setText(desejo.getTitulo());
+				}
+			} catch (Exception e) {
+
+			}
+		}
+	}
+	
+	private void limparCampos() {
+		edIdDesejo.setText("0");
+		edCategoria.setText("");
+		edDataTermino.setText("");
+		edDescricao.setText("");
+		edTitulo.setText("");
+	}
 
 	/**
 	 * Create the frame.
@@ -113,7 +144,7 @@ public class FrmCadastroDesejo extends JDialog {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				Desejo desejo = new Desejo();
-				desejo.setIdDesejo(0);	
+				desejo.setIdDesejo(Integer.parseInt(edIdDesejo.getText()));
 				desejo.setCaminhoImagem("Caminho nenhum");
 				desejo.setCategoria(edCategoria.getText());
 				desejo.setDataCriacao(new Date());
@@ -123,12 +154,15 @@ public class FrmCadastroDesejo extends JDialog {
 				desejo.setTitulo(edTitulo.getText());
 				desejo.setIdUsuario(Sessao.getInstance().getUsuario().getId());
 				try {
-					desejoController.criarDesejo(desejo);
-					edCategoria.setText("");
-					edDataTermino.setText("");
-					edDescricao.setText("");
-					edTitulo.setText("");
-					JOptionPane.showMessageDialog(null, "Desejo criado com sucesso");
+					if (desejoController.buscar(desejo) == null) {
+						desejoController.criarDesejo(desejo);
+						limparCampos();
+						JOptionPane.showMessageDialog(null, "Desejo criado com sucesso");
+					} else {
+						desejoController.editar(desejo);
+						limparCampos();
+						JOptionPane.showMessageDialog(null, "Desejo editado com sucesso");
+					}
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
@@ -136,5 +170,51 @@ public class FrmCadastroDesejo extends JDialog {
 		});
 		btnSalvar.setBounds(131, 173, 89, 23);
 		contentPane.add(btnSalvar);
+		
+		edIdDesejo = new JTextField();
+		edIdDesejo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					carregarDesejo();
+				}
+			}
+		});
+		edIdDesejo.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				carregarDesejo();
+			}
+		});
+		edIdDesejo.setText("0");
+		edIdDesejo.setColumns(10);
+		edIdDesejo.setBounds(134, 38, 200, 20);
+		contentPane.add(edIdDesejo);
+		
+		JLabel lblId = new JLabel("ID");
+		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblId.setBounds(65, 41, 61, 14);
+		contentPane.add(lblId);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (Integer.parseInt(edIdDesejo.getText()) != 0) {
+					if (JOptionPane.showConfirmDialog(null, "Deseja excluir esse desejo e suas respectivas ofertas?") == JOptionPane.YES_OPTION) {
+						Desejo desejo = new Desejo();
+						desejo.setIdDesejo(Integer.parseInt(edIdDesejo.getText()));
+						try {
+							desejoController.excluir(desejo);
+							limparCampos();
+							JOptionPane.showMessageDialog(null, "Desejo excluído com sucesso.");
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, "Erro ao excluir o desejo.\n" + e1.getMessage());
+						}
+					}
+				}
+			}
+		});
+		btnExcluir.setBounds(245, 173, 89, 23);
+		contentPane.add(btnExcluir);
 	}
 }

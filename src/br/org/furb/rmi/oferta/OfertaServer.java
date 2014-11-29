@@ -49,4 +49,14 @@ public class OfertaServer extends UnicastRemoteObject implements OfertaRMI {
 		return ofertaDaoImpl.buscar(oferta);
 	}
 
+	@Override
+	public boolean excluir(Oferta oferta) throws Exception {
+		return ofertaDaoImpl.excluir(oferta);
+	}
+
+	@Override
+	public boolean editar(Oferta oferta) throws Exception {
+		return ofertaDaoImpl.editar(oferta);
+	}
+
 }

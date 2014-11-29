@@ -2,6 +2,7 @@ package br.org.furb.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -18,6 +19,11 @@ import br.org.furb.model.Oferta;
 import br.org.furb.model.Sessao;
 import br.org.furb.model.StatusOferta;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 @SuppressWarnings("serial")
 public class FrmCadastroOferta extends JDialog {
 
@@ -28,7 +34,8 @@ public class FrmCadastroOferta extends JDialog {
 	private JTextField edDescricao;
 	private JTextField edQtdeMinParticipantes;
 	private JTextField edIdDesejo;
-	OfertaController ofertaController;
+	private OfertaController ofertaController;
+	private JTextField edIdOferta;
 
 	/**
 	 * Launch the application.
@@ -45,7 +52,41 @@ public class FrmCadastroOferta extends JDialog {
 			}
 		});
 	}*/
+	
+	private void carregarOferta() {
+		if (Integer.parseInt(edIdOferta.getText()) == 0) {
+			limparCampos();
+		} else {
+			Oferta oferta = new Oferta();
+			oferta.setId(Integer.parseInt(edIdOferta.getText()));
+			try {
+				oferta = ofertaController.buscar(oferta);
+				if (oferta != null) {
+					limparCampos();
+					edIdOferta.setText(String.valueOf(oferta.getId()));
+					edDataTermino.setText(new SimpleDateFormat("dd/MM/yyyy").format(oferta.getDataTermino()));
+					edDescricao.setText(new SimpleDateFormat("dd/MM/yyyy").format(oferta.getDataCriacao()));
+					edIdDesejo.setText(String.valueOf(oferta.getIdDesejo()));
+					edLocal.setText(oferta.getLocal());
+					edQtdeMinParticipantes.setText(String.valueOf(oferta.getQtdMinimaParticipantes()));
+					edValor.setText(String.valueOf(oferta.getValorOferta()));
+				}
+			} catch (Exception e) {
 
+			}
+		}
+	}
+
+	private void limparCampos() {
+		edIdOferta.setText("0");
+		edDataTermino.setText("");
+		edDescricao.setText("");
+		edIdDesejo.setText("");
+		edLocal.setText("");
+		edQtdeMinParticipantes.setText("");
+		edValor.setText("");
+	}
+	
 	/**
 	 * Create the frame.
 	 */
@@ -76,14 +117,15 @@ public class FrmCadastroOferta extends JDialog {
 				oferta.setStatus(StatusOferta.ABERTA);
 				oferta.setValorOferta(Double.parseDouble(edValor.getText()));
 				try {
-					ofertaController.criarOferta(oferta);
-					edDataTermino.setText("");
-					edDescricao.setText("");
-					edIdDesejo.setText("");
-					edLocal.setText("");
-					edQtdeMinParticipantes.setText("");
-					edValor.setText("");
-					JOptionPane.showMessageDialog(null, "Oferta criada com sucesso");
+					if (ofertaController.buscar(oferta) == null) {
+						ofertaController.criarOferta(oferta);
+						limparCampos();
+						JOptionPane.showMessageDialog(null, "Oferta criada com sucesso");
+					} else {
+						ofertaController.editar(oferta);
+						limparCampos();
+						JOptionPane.showMessageDialog(null, "Oferta editada com sucesso");
+					}
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
@@ -155,5 +197,50 @@ public class FrmCadastroOferta extends JDialog {
 		edIdDesejo.setColumns(10);
 		edIdDesejo.setBounds(134, 194, 200, 20);
 		contentPane.add(edIdDesejo);
+		
+		JLabel lblId = new JLabel("ID");
+		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblId.setBounds(35, 41, 91, 14);
+		contentPane.add(lblId);
+		
+		edIdOferta = new JTextField();
+		edIdOferta.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					carregarOferta();
+				}
+			}
+		});
+		edIdOferta.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				carregarOferta();
+			}
+		});
+		edIdOferta.setColumns(10);
+		edIdOferta.setBounds(134, 38, 200, 20);
+		contentPane.add(edIdOferta);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (Integer.parseInt(edIdOferta.getText()) != 0) {
+					if (JOptionPane.showConfirmDialog(null, "Deseja excluir essa oferta?") == JOptionPane.YES_OPTION) {
+						Oferta oferta = new Oferta();
+						oferta.setId(Integer.parseInt(edIdOferta.getText()));
+						try {
+							ofertaController.excluir(oferta);
+							limparCampos();
+							JOptionPane.showMessageDialog(null, "Oferta excluída com sucesso.");
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, "Erro ao excluir a oferta.\n" + e1.getMessage());
+						}
+					}
+				}
+			}
+		});
+		btnExcluir.setBounds(245, 221, 89, 23);
+		contentPane.add(btnExcluir);
 	}
 }

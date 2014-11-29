@@ -17,4 +17,12 @@ public class OfertaController {
 	public Oferta buscar(Oferta oferta) throws Exception {
 		return new OfertaClient().getOfertaClient().buscar(oferta);
 	}
+	
+	public boolean excluir(Oferta oferta) throws Exception {
+		return new OfertaClient().getOfertaClient().excluir(oferta);
+	}
+	
+	public boolean editar(Oferta oferta) throws Exception {
+		return new OfertaClient().getOfertaClient().editar(oferta);
+	}
 }

@@ -10,4 +10,6 @@ public interface OfertaRMI extends Remote {
    public void criarOferta(Oferta oferta) throws Exception;
    public List<Oferta> listar(Oferta ofertaInicial, Oferta ofertaFinal) throws Exception;
    public Oferta buscar(Oferta oferta) throws Exception;
+   public boolean excluir(Oferta oferta) throws Exception;
+   public boolean editar(Oferta oferta) throws Exception;
 }

@@ -137,6 +137,11 @@ public class FrmPrincipal extends JFrame {
 		panel.add(lblOl);
 
 		btnNotificaes = new JButton("Notificações");
+		btnNotificaes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new DlgNotificacoes().setVisible(true);
+			}
+		});
 		btnNotificaes.setBounds(102, 7, 99, 23);
 		panel.add(btnNotificaes);
 

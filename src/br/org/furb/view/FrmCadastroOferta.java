@@ -204,6 +204,7 @@ public class FrmCadastroOferta extends JDialog {
 		contentPane.add(lblId);
 		
 		edIdOferta = new JTextField();
+		edIdOferta.setText("0");
 		edIdOferta.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {

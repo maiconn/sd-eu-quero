@@ -7,9 +7,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+
+import br.org.furb.controller.DesejoController;
+import br.org.furb.model.Desejo;
+import br.org.furb.model.StatusDesejo;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.Date;
 
 public class FrmCadastroDesejo extends JFrame {
 
@@ -18,6 +30,7 @@ public class FrmCadastroDesejo extends JFrame {
 	private JTextField edDescricao;
 	private JTextField edCategoria;
 	private JTextField edDataTermino;
+	private DesejoController desejoController;
 
 	/**
 	 * Launch the application.
@@ -90,7 +103,38 @@ public class FrmCadastroDesejo extends JFrame {
 		contentPane.add(edDataTermino);
 		edDataTermino.setColumns(10);
 		
+		try {
+			desejoController = new DesejoController();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Desejo desejo = new Desejo();
+				desejo.setIdDesejo(0);	
+				desejo.setCaminhoImagem("Caminho nenhum");
+				desejo.setCategoria(edCategoria.getText());
+				desejo.setDataCriacao(new Date());
+				desejo.setDataTermino(new Date(edDataTermino.getText()));
+				desejo.setDescricao(edDescricao.getText());
+				desejo.setStatus(StatusDesejo.ABERTO);
+				desejo.setTitulo(edTitulo.getText());
+				try {
+					desejoController.criarDesejo(desejo);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			}
+		});
 		btnSalvar.setBounds(131, 173, 89, 23);
 		contentPane.add(btnSalvar);
 	}

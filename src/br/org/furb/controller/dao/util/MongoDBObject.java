@@ -24,7 +24,10 @@ public abstract class MongoDBObject implements Serializable {
 				String name = f.getName();
 				f.setAccessible(true);
 				Enum<?> enumerador = (Enum<?>) f.get(this);
-				obj.put(name, enumerador.ordinal());
+				if (enumerador != null)
+					obj.put(name, enumerador.ordinal());
+				else
+					obj.put(name, null);
 			}
 			if (f.getType().isPrimitive() || f.getType().equals(String.class)
 					|| f.getType().equals(Double.class)
@@ -51,7 +54,8 @@ public abstract class MongoDBObject implements Serializable {
 			if (f.getType().isEnum()) {
 				f.setAccessible(true);
 				if (objMap.get(nameField) != null) {
-					Object itemInstance = f.getType().getEnumConstants()[(Integer) objMap.get(nameField)];
+					Object itemInstance = f.getType().getEnumConstants()[(Integer) objMap
+							.get(nameField)];
 					f.set(this, itemInstance);
 				}
 			} else {

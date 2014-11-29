@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
@@ -25,8 +27,6 @@ import br.org.furb.model.Sessao;
 import br.org.furb.model.Usuario;
 import br.org.furb.ws.usuario.cliente.Exception_Exception;
 
-import javax.swing.JTextArea;
-
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame {
 
@@ -34,8 +34,8 @@ public class FrmPrincipal extends JFrame {
 	private JLabel lblUsuariologado;
 	private JButton btnNotificaes, btnMinhasOfertas, btnMeusDesejos, btnLogin;
 	private JList list;
-	private String[] itensListaAnuncios;
 	private JTextArea taDesejos;
+	final DefaultListModel model = new DefaultListModel ();
 
 	/**
 	 * Launch the application.
@@ -139,7 +139,6 @@ public class FrmPrincipal extends JFrame {
 		panel_1.setBounds(0, 58, 415, 311);
 		contentPane.add(panel_1);
 
-		String[] teste2 = { "Desejo1", "Desejo2", "Desejo3" };
 		panel_1.setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 395, 289);
@@ -159,8 +158,7 @@ public class FrmPrincipal extends JFrame {
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 	
-		itensListaAnuncios = new String [] {"teste"};
-		list = new JList(itensListaAnuncios);
+		list = new JList(model);
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBounds(10, 11, 122, 289);
 		panel_2.add(scroll);
@@ -200,9 +198,10 @@ public class FrmPrincipal extends JFrame {
 			e.printStackTrace();
 		}	
 		
-		itensListaAnuncios = strTemp.split(";");		
-		list = new JList(itensListaAnuncios);
-		
+		model.clear();
+		for( String str: strTemp.split(";")){
+			model.addElement(str);
+		}
 
 	}
 }

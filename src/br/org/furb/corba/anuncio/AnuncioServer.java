@@ -40,7 +40,7 @@ public class AnuncioServer {
 			NameComponent path[] = ncRef.to_name(SERVER_NAME);
 			ncRef.rebind(path, href);
 
-			System.out.println("Servidor de anúncios aguardando requisicoes....");
+			System.out.println("Servidor CORBA de ANUNCIOS startado...");
 
 			// Aguarda chamadas dos clientes
 			orb.run();

@@ -3,6 +3,7 @@ package br.org.furb.view;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
@@ -32,17 +33,25 @@ public class DlgNotificacoes extends JDialog {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(0, 0, 310, 307);
 		getContentPane().add(scrollPane);
+		buscarNotificacoes();
 	}
 
-	public void buscarNotificacoes() throws Exception {
+	public void buscarNotificacoes() {
 		model.clear();
 		
 		NotificacaoController notificacaoController = new NotificacaoController();
 		Usuario usuarioLogado = Sessao.getInstance().getUsuario();
 		
-		String strTemp = notificacaoController.getNotificacoes(usuarioLogado.getId());
-		for( String str: strTemp.split(";")){
-			model.addElement(str);
+		String strTemp;
+		try {
+			strTemp = notificacaoController.getNotificacoes(usuarioLogado.getId());
+			for( String str: strTemp.split(";")){
+				model.addElement(str);
+			}
+		} catch (Exception e1) {			
+			JOptionPane.showMessageDialog(null, e1.getMessage(),
+					"Erro", JOptionPane.ERROR_MESSAGE);
 		}
+				
 	}
 }

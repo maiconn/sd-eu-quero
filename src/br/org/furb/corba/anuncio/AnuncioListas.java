@@ -7,7 +7,7 @@ public class AnuncioListas {
 
 	private Map<String, String> listaDefault;
 
-	public Map<String, String> getListaDefault() {
+	public Map<String, String> getLista() {
 		setListaDefault();
 		return listaDefault;
 	}

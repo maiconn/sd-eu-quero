@@ -68,41 +68,41 @@ public class FrmCadastroDesejo extends JDialog {
 		
 		JLabel lblTtulo = new JLabel("T\u00EDtulo");
 		lblTtulo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTtulo.setBounds(80, 67, 46, 14);
+		lblTtulo.setBounds(65, 67, 61, 14);
 		contentPane.add(lblTtulo);
 		
 		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
 		lblDescrio.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDescrio.setBounds(80, 93, 46, 14);
+		lblDescrio.setBounds(35, 93, 91, 14);
 		contentPane.add(lblDescrio);
 		
 		JLabel lblCategoria = new JLabel("Categoria");
 		lblCategoria.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCategoria.setBounds(58, 119, 68, 14);
+		lblCategoria.setBounds(35, 119, 91, 14);
 		contentPane.add(lblCategoria);
 		
 		JLabel lblDataDeTrmino = new JLabel("Data de término");
 		lblDataDeTrmino.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDataDeTrmino.setBounds(35, 145, 91, 14);
+		lblDataDeTrmino.setBounds(24, 145, 102, 14);
 		contentPane.add(lblDataDeTrmino);
 		
 		edTitulo = new JTextField();
-		edTitulo.setBounds(134, 64, 86, 20);
+		edTitulo.setBounds(134, 64, 200, 20);
 		contentPane.add(edTitulo);
 		edTitulo.setColumns(10);
 		
 		edDescricao = new JTextField();
-		edDescricao.setBounds(134, 90, 86, 20);
+		edDescricao.setBounds(134, 90, 200, 20);
 		contentPane.add(edDescricao);
 		edDescricao.setColumns(10);
 		
 		edCategoria = new JTextField();
-		edCategoria.setBounds(134, 116, 86, 20);
+		edCategoria.setBounds(134, 116, 200, 20);
 		contentPane.add(edCategoria);
 		edCategoria.setColumns(10);
 		
 		edDataTermino = new JTextField();
-		edDataTermino.setBounds(134, 142, 86, 20);
+		edDataTermino.setBounds(134, 142, 200, 20);
 		contentPane.add(edDataTermino);
 		edDataTermino.setColumns(10);
 		
@@ -124,11 +124,11 @@ public class FrmCadastroDesejo extends JDialog {
 				desejo.setIdUsuario(Sessao.getInstance().getUsuario().getId());
 				try {
 					desejoController.criarDesejo(desejo);
-					JOptionPane.showMessageDialog(null, "Desejo criado com sucesso");
 					edCategoria.setText("");
 					edDataTermino.setText("");
 					edDescricao.setText("");
 					edTitulo.setText("");
+					JOptionPane.showMessageDialog(null, "Desejo criado com sucesso");
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}

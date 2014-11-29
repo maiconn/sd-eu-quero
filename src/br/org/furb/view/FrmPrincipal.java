@@ -22,10 +22,15 @@ import javax.swing.border.TitledBorder;
 
 import br.org.furb.controller.AnuncioController;
 import br.org.furb.controller.DesejoController;
+import br.org.furb.controller.OfertaController;
+import br.org.furb.controller.UsuarioController;
 import br.org.furb.model.Desejo;
+import br.org.furb.model.Oferta;
 import br.org.furb.model.Sessao;
 import br.org.furb.model.Usuario;
 import br.org.furb.ws.usuario.cliente.Exception_Exception;
+
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame {
@@ -35,7 +40,11 @@ public class FrmPrincipal extends JFrame {
 	private JButton btnNotificaes, btnMinhasOfertas, btnMeusDesejos, btnLogin;
 	private JList list;
 	private JTextArea taDesejos;
+
+	private DesejoController desejoController;
+
 	final DefaultListModel model = new DefaultListModel ();
+
 
 	/**
 	 * Launch the application.
@@ -57,13 +66,9 @@ public class FrmPrincipal extends JFrame {
 	
 	private void carregarDesejos() {
 		try {
-			List<Desejo> listaDesejos = new DesejoController().listar(null, null);
-			taDesejos.setText("");
-			for (Desejo desejo : listaDesejos) {
-				taDesejos.setText(taDesejos.getText() + "\n" + desejo);
-			}
-		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
+			taDesejos.setText(desejoController.carregarDesejos());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 	}
 
@@ -86,6 +91,7 @@ public class FrmPrincipal extends JFrame {
 		panel.setBounds(0, 0, 559, 58);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		desejoController = new DesejoController();
 
 		btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -116,6 +122,7 @@ public class FrmPrincipal extends JFrame {
 		btnMinhasOfertas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FrmCadastroOferta().setVisible(true);
+				carregarDesejos();
 			}
 		});
 		btnMinhasOfertas.setBounds(204, 7, 135, 23);
@@ -149,6 +156,8 @@ public class FrmPrincipal extends JFrame {
 		panel_1.add(scrollPane);
 		
 		taDesejos = new JTextArea();
+		taDesejos.setFont(new Font("Arial", Font.BOLD, 13));
+		taDesejos.setEditable(false);
 		scrollPane.setViewportView(taDesejos);
 
 		JPanel panel_2 = new JPanel();

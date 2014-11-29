@@ -15,6 +15,24 @@ public class Oferta extends MongoDBObject {
 	private String local;
 	private int qtdMinimaParticipantes;
 	private StatusOferta status;
+	private int idUsuario;
+	private int idDesejo;
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public int getIdDesejo() {
+		return idDesejo;
+	}
+
+	public void setIdDesejo(int idDesejo) {
+		this.idDesejo = idDesejo;
+	}
 
 	public int getId() {
 		return id;
@@ -86,5 +104,9 @@ public class Oferta extends MongoDBObject {
 
 	public void setStatus(StatusOferta status) {
 		this.status = status;
+	}
+	
+	public String toString() {
+		return id + " - " + descricao + " - " + valorOferta;
 	}
 }

@@ -5,9 +5,15 @@ import java.rmi.*;
 import java.rmi.server.*;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import br.org.furb.controller.DesejoController;
+import br.org.furb.controller.OfertaController;
+import br.org.furb.controller.UsuarioController;
 import br.org.furb.controller.dao.DAO;
 import br.org.furb.controller.dao.impl.DesejoDaoImpl;
 import br.org.furb.model.Desejo;
+import br.org.furb.model.Oferta;
 import br.org.furb.util.Constantes;
 
 @SuppressWarnings("serial")
@@ -45,6 +51,25 @@ public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 	@Override
 	public List<Desejo> listar(Desejo desejoInicial, Desejo desejoFinal) throws Exception {
 		return desejoDaoImpl.listar(desejoInicial, desejoFinal);
+	}
+
+	@Override
+	public String carregarDesejos() throws Exception {
+		String result = "";
+		List<Desejo> listaDesejos = new DesejoController().listar(null, null);
+		UsuarioController usuarioController = new UsuarioController();
+		OfertaController ofertaController = new OfertaController();
+		Oferta ofertaInicial;
+		for (Desejo desejo : listaDesejos) {
+			result = result + "\n" + desejo + " - " + usuarioController.buscar(desejo.getIdUsuario()).getNome();
+			ofertaInicial = new Oferta();
+			ofertaInicial.setIdDesejo(desejo.getIdDesejo());
+			List<Oferta> listaOfertas = ofertaController.listar(ofertaInicial, null);
+			for (Oferta oferta : listaOfertas) {
+				result = result + "\n                    " + oferta + " - " + usuarioController.buscar(oferta.getIdUsuario()).getNome();
+			}
+		}
+		return result;
 	}
 	
 

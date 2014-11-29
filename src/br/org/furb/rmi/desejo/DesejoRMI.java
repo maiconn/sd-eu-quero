@@ -9,4 +9,5 @@ public interface DesejoRMI extends Remote{
 
    public String CriarDesejo(Desejo desejo) throws RemoteException;
    public List<Desejo> listar(Desejo desejoInicial, Desejo desejoFinal) throws Exception;
+   public String carregarDesejos() throws Exception;
 }

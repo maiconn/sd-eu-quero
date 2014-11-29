@@ -85,7 +85,7 @@ public class OfertaDaoImpl implements DAO<Oferta> {
                 DBCollection collection = conexao.getCollection(TABELA);
 
                 BasicDBObject filtro = new BasicDBObject();
-                if (ofertaInicial.getId() < 0) {
+                if (ofertaInicial.getId() > 0) {
                     filtro.put("id", ofertaInicial.getId());
                 }
 
@@ -119,6 +119,14 @@ public class OfertaDaoImpl implements DAO<Oferta> {
                 
                 if (ofertaInicial.getQtdMinimaParticipantes() != 0) {
                     filtro.put("qtdMinimaParticipantes", (ofertaInicial.getQtdMinimaParticipantes()));
+                }
+                
+                if (ofertaInicial.getIdUsuario() > 0) {
+                    filtro.put("idUsuario", ofertaInicial.getIdUsuario());
+                }
+                
+                if (ofertaInicial.getIdDesejo() > 0) {
+                    filtro.put("idDesejo", ofertaInicial.getIdDesejo());
                 }
 
                 DBCursor cursor = collection.find(filtro);

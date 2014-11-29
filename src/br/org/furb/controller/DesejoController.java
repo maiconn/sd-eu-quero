@@ -14,4 +14,8 @@ public class DesejoController {
 	public List<Desejo> listar(Desejo desejoInicial, Desejo desejoFinal) throws Exception {
 		return new DesejoClient().getDesejoClient().listar(desejoInicial, desejoFinal);
 	}
+	
+	public String carregarDesejos() throws Exception {
+		return new DesejoClient().getDesejoClient().carregarDesejos();
+	}
 }

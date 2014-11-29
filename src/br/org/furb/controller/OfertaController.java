@@ -13,4 +13,8 @@ public class OfertaController {
 	public List<Oferta> listar(Oferta ofertaInicial, Oferta ofertaFinal) throws Exception {
 		return new OfertaClient().getOfertaClient().listar(ofertaInicial, ofertaFinal);
 	}
+	
+	public Oferta buscar(Oferta oferta) throws Exception {
+		return new OfertaClient().getOfertaClient().buscar(oferta);
+	}
 }

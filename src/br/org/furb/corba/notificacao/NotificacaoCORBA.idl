@@ -3,8 +3,8 @@ module _notificacao {
 
   interface NotificacaoInterface {
 
-    string getNotificoes(in long idUsuario);
-	boolean criarNotificacao(in long idUsuario, in long tipoNotificacao);
+    string getNotificacoes(in long idUsuario);
+	boolean criarNotificacao(in long idUsuario, in long tipoNotificacao, in long idDesejoOferta);
 
   };
 

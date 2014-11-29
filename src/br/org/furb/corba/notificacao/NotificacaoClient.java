@@ -34,8 +34,8 @@ public class NotificacaoClient {
 	
 	public static void main(String[] args) throws Exception {
 		NotificacaoClient client = new NotificacaoClient();
-		System.out.println(client.getNotificacaoClient().getNotificoes(15));
-		System.out.println(client.getNotificacaoClient().criarNotificacao(13, TipoNotificacao.DESEJO.ordinal()));
+		System.out.println(client.getNotificacaoClient().getNotificacoes(15));
+		System.out.println(client.getNotificacaoClient().criarNotificacao(13, TipoNotificacao.DESEJO.ordinal(), 7));
 	}
 
 }

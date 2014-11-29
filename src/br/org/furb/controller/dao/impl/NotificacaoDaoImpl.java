@@ -84,7 +84,7 @@ public class NotificacaoDaoImpl implements DAO<Notificacao> {
                 DBCollection collection = conexao.getCollection(TABELA);
 
                 BasicDBObject filtro = new BasicDBObject();
-                if (notificacaoInicial.getId() < 0) {
+                if (notificacaoInicial.getId() > 0) {
                     filtro.put("id", notificacaoInicial.getId());
                 }
 

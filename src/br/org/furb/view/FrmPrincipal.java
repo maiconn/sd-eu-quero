@@ -3,11 +3,13 @@ package br.org.furb.view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -17,9 +19,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import br.org.furb.controller.AnuncioController;
+import br.org.furb.controller.DesejoController;
+import br.org.furb.model.Desejo;
 import br.org.furb.model.Sessao;
 import br.org.furb.model.Usuario;
 import br.org.furb.ws.usuario.cliente.Exception_Exception;
+
+import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame {
@@ -29,6 +35,7 @@ public class FrmPrincipal extends JFrame {
 	private JButton btnNotificaes, btnMinhasOfertas, btnMeusDesejos, btnLogin;
 	private JList list;
 	private String[] itensListaAnuncios;
+	private JTextArea taDesejos;
 
 	/**
 	 * Launch the application.
@@ -46,6 +53,18 @@ public class FrmPrincipal extends JFrame {
 				}
 			}
 		});
+	}
+	
+	private void carregarDesejos() {
+		try {
+			List<Desejo> listaDesejos = new DesejoController().listar(null, null);
+			taDesejos.setText("");
+			for (Desejo desejo : listaDesejos) {
+				taDesejos.setText(taDesejos.getText() + "\n" + desejo);
+			}
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
 	}
 
 	/**
@@ -77,17 +96,29 @@ public class FrmPrincipal extends JFrame {
 					Sessao.getInstance().setUsuario(null);
 				}
 				verificaUsuario();
+				carregarDesejos();
 			}
 		});
 		btnLogin.setBounds(474, 7, 75, 23);
 		panel.add(btnLogin);
 
-		btnMeusDesejos = new JButton("Meus Desejos");
-		btnMeusDesejos.setBounds(365, 7, 99, 23);
+		btnMeusDesejos = new JButton("Cadastrar Desejos");
+		btnMeusDesejos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FrmCadastroDesejo().setVisible(true);
+				carregarDesejos();
+			}
+		});
+		btnMeusDesejos.setBounds(343, 7, 121, 23);
 		panel.add(btnMeusDesejos);
 
-		btnMinhasOfertas = new JButton("Minhas Ofertas");
-		btnMinhasOfertas.setBounds(249, 7, 114, 23);
+		btnMinhasOfertas = new JButton("Cadastrar Ofertas");
+		btnMinhasOfertas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new FrmCadastroOferta().setVisible(true);
+			}
+		});
+		btnMinhasOfertas.setBounds(204, 7, 135, 23);
 		panel.add(btnMinhasOfertas);
 
 		lblUsuariologado = new JLabel("USUARIO_LOGADO");
@@ -99,7 +130,7 @@ public class FrmPrincipal extends JFrame {
 		panel.add(lblOl);
 
 		btnNotificaes = new JButton("Notificações");
-		btnNotificaes.setBounds(147, 7, 99, 23);
+		btnNotificaes.setBounds(102, 7, 99, 23);
 		panel.add(btnNotificaes);
 
 		JPanel panel_1 = new JPanel();
@@ -107,18 +138,19 @@ public class FrmPrincipal extends JFrame {
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(0, 58, 415, 311);
 		contentPane.add(panel_1);
-		panel_1.setLayout(null);
 
 		String[] teste2 = { "Desejo1", "Desejo2", "Desejo3" };
-		JList list2 = new JList(teste2);
+		panel_1.setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportView(list2);
+		scrollPane.setBounds(10, 11, 395, 289);
 		scrollPane
 				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane
 				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(10, 11, 395, 289);
 		panel_1.add(scrollPane);
+		
+		taDesejos = new JTextArea();
+		scrollPane.setViewportView(taDesejos);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Anuncios",
@@ -136,6 +168,9 @@ public class FrmPrincipal extends JFrame {
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setViewportView(list);
 		verificaUsuario();
+		
+		carregarDesejos();
+		
 	}
 
 	public void verificaUsuario() {
@@ -149,6 +184,7 @@ public class FrmPrincipal extends JFrame {
 
 		// TODO VERIFICAR ANUNCIOS...		
 		buscaAnuncios(usuarioLogado);
+		
 	}
 	
 	public void buscaAnuncios(Usuario usuario){		

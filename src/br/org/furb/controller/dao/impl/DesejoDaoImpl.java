@@ -112,6 +112,10 @@ public class DesejoDaoImpl implements DAO<Desejo> {
                 if (desejoInicial.getCategoria() != null) {
                     filtro.put("categoria", java.util.regex.Pattern.compile(desejoInicial.getCategoria()));
                 }
+                
+                if (desejoInicial.getIdUsuario() < 0) {
+                    filtro.put("idUsuario", desejoInicial.getIdUsuario());
+                }
 
                 DBCursor cursor = collection.find(filtro);
 

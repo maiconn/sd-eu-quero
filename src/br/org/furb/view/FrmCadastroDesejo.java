@@ -1,29 +1,30 @@
 package br.org.furb.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-
-import br.org.furb.controller.DesejoController;
-import br.org.furb.model.Desejo;
-import br.org.furb.model.StatusDesejo;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Date;
 
-public class FrmCadastroDesejo extends JFrame {
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import br.org.furb.controller.DesejoController;
+import br.org.furb.model.Desejo;
+import br.org.furb.model.Sessao;
+import br.org.furb.model.StatusDesejo;
+
+@SuppressWarnings("serial")
+public class FrmCadastroDesejo extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField edTitulo;
@@ -35,7 +36,7 @@ public class FrmCadastroDesejo extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -46,13 +47,15 @@ public class FrmCadastroDesejo extends JFrame {
 				}
 			}
 		});
-	}
+	} */
 
 	/**
 	 * Create the frame.
 	 */
 	public FrmCadastroDesejo() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setModal(true);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 546, 421);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -103,21 +106,11 @@ public class FrmCadastroDesejo extends JFrame {
 		contentPane.add(edDataTermino);
 		edDataTermino.setColumns(10);
 		
-		try {
-			desejoController = new DesejoController();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		desejoController = new DesejoController();
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				Desejo desejo = new Desejo();
 				desejo.setIdDesejo(0);	
@@ -128,8 +121,14 @@ public class FrmCadastroDesejo extends JFrame {
 				desejo.setDescricao(edDescricao.getText());
 				desejo.setStatus(StatusDesejo.ABERTO);
 				desejo.setTitulo(edTitulo.getText());
+				desejo.setIdUsuario(Sessao.getInstance().getUsuario().getId());
 				try {
 					desejoController.criarDesejo(desejo);
+					JOptionPane.showMessageDialog(null, "Desejo criado com sucesso");
+					edCategoria.setText("");
+					edDataTermino.setText("");
+					edDescricao.setText("");
+					edTitulo.setText("");
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}

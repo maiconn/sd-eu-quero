@@ -3,6 +3,7 @@ package br.org.furb.rmi.desejo;
 import java.net.MalformedURLException;
 import java.rmi.*;
 import java.rmi.server.*;
+import java.util.List;
 
 import br.org.furb.controller.dao.DAO;
 import br.org.furb.controller.dao.impl.DesejoDaoImpl;
@@ -39,6 +40,11 @@ public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 			return e.getMessage();
 		}
 		return "Desejo criado com sucesso";
+	}
+
+	@Override
+	public List<Desejo> listar(Desejo desejoInicial, Desejo desejoFinal) throws Exception {
+		return desejoDaoImpl.listar(desejoInicial, desejoFinal);
 	}
 	
 

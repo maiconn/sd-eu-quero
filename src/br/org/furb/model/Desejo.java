@@ -14,7 +14,14 @@ public class Desejo extends MongoDBObject {
 	private Date dataTermino;
 	private StatusDesejo status;
 	private String categoria;
+	private int idUsuario;
 	
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 	public int getIdDesejo() {
 		return idDesejo;
 	}
@@ -62,5 +69,15 @@ public class Desejo extends MongoDBObject {
 	}
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	
+	public String toString() {
+		//Usuario usuario = new Usuario();
+		//usuario.setId(idUsuario);
+		//try {
+		//	return idDesejo + " - " + titulo + " - " + descricao + " - " + new UsuarioDaoImpl().buscar(usuario).getNome();
+		//} catch (Exception e) {
+			return idDesejo + " - " + titulo + " - " + descricao;
+		//}
 	}
 }

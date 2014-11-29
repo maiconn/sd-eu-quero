@@ -1,22 +1,17 @@
 package br.org.furb.controller;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.util.List;
+
 import br.org.furb.model.Desejo;
-import br.org.furb.rmi.desejo.DesejoRMI;
-import br.org.furb.util.Constantes;
+import br.org.furb.rmi.desejo.DesejoClient;
 
 public class DesejoController {
 	
-	DesejoRMI desejoRMI;
-	
-	public DesejoController() throws MalformedURLException, RemoteException, NotBoundException {
-		desejoRMI = (DesejoRMI) Naming.lookup("//" + Constantes.IP_RMI + "/DesejoRMI");
+	public void criarDesejo(Desejo desejo) throws Exception {
+		new DesejoClient().getDesejoClient().CriarDesejo(desejo);
 	}
 	
-	public void criarDesejo(Desejo desejo) throws Exception {
-		desejoRMI.CriarDesejo(desejo);
+	public List<Desejo> listar(Desejo desejoInicial, Desejo desejoFinal) throws Exception {
+		return new DesejoClient().getDesejoClient().listar(desejoInicial, desejoFinal);
 	}
 }

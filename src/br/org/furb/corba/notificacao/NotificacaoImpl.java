@@ -56,7 +56,7 @@ public class NotificacaoImpl extends NotificacaoInterfacePOA{
 				DesejoController desejoController = new DesejoController();
 				Desejo desejo = new Desejo();
 				desejo.setIdDesejo(idDesejoOferta);
-				desejoController.buscar(desejo);
+				desejo = desejoController.buscar(desejo);
 				if (desejo!=null){					
 					descricao = "Seu desejo '" + desejo.getDescricao()+ "' foi criado com sucesso. Compartilhe com seus amigos.";
 				}	
@@ -65,13 +65,13 @@ public class NotificacaoImpl extends NotificacaoInterfacePOA{
 				OfertaController ofertaController = new OfertaController();				
 				Oferta oferta = new Oferta();				
 				oferta.setId(idDesejoOferta);
-				ofertaController.buscar(oferta);
+				oferta = ofertaController.buscar(oferta);
 				
 				if (oferta!=null){
 					DesejoController desejoController = new DesejoController();
 					Desejo desejo = new Desejo();
 					desejo.setIdDesejo(oferta.getIdDesejo());
-					desejoController.buscar(desejo);
+					desejo = desejoController.buscar(desejo);
 					
 					if (desejo != null){
 						idUsuario = desejo.getIdUsuario();

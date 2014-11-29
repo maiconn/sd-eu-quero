@@ -20,6 +20,7 @@ public class DlgCriarUsuario extends JDialog {
 	private JTextField txtTelefone;
 	private JPasswordField txtSenha;
 	private JTextField txtCep;
+	private JTextField txtGostos;
 
 	/**
 	 * Create the dialog.
@@ -28,7 +29,7 @@ public class DlgCriarUsuario extends JDialog {
 		setResizable(false);
 		setTitle("Cadastrar Usuário");
 		setModal(true);
-		setBounds(100, 100, 450, 207);
+		setBounds(100, 100, 450, 238);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
@@ -43,7 +44,7 @@ public class DlgCriarUsuario extends JDialog {
 				}
 			}
 		});
-		btnCadastrar.setBounds(114, 142, 128, 23);
+		btnCadastrar.setBounds(114, 172, 128, 23);
 		getContentPane().add(btnCadastrar);
 
 		JLabel lblNome = new JLabel("Nome:");
@@ -89,6 +90,15 @@ public class DlgCriarUsuario extends JDialog {
 		txtCep.setColumns(10);
 		txtCep.setBounds(114, 111, 241, 20);
 		getContentPane().add(txtCep);
+		
+		txtGostos = new JTextField();
+		txtGostos.setColumns(10);
+		txtGostos.setBounds(114, 141, 241, 20);
+		getContentPane().add(txtGostos);
+		
+		JLabel lblGostos = new JLabel("Gostos:");
+		lblGostos.setBounds(10, 144, 101, 14);
+		getContentPane().add(lblGostos);
 	}
 
 	public void cadastrarUsuario() throws Exception {
@@ -99,7 +109,8 @@ public class DlgCriarUsuario extends JDialog {
 		usuario.setNome(txtNome.getText().trim());
 		usuario.setSenha(new String(txtSenha.getPassword()));
 		usuario.setTelefone(txtTelefone.getText().toString().trim());
-
+		usuario.setGostos(txtGostos.getText().toString().trim());
+		
 		if (new String(usuario.getCep() + "").isEmpty()) {
 			throw new Exception("Favor digitar um cep.");
 		}
@@ -125,6 +136,6 @@ public class DlgCriarUsuario extends JDialog {
 		txtSenha.setText("");
 		txtTelefone.setText("");
 		txtCep.setText("");
+		txtGostos.setText("");
 	}
-
 }

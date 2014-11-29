@@ -25,11 +25,15 @@ public class UsuarioWS {
 	}
 
 	@WebMethod
-	public String buscar(String nome) {
-		Usuario user = new Usuario();
-		user.setId(99);
-		user.setNome("Bah");
-		return user.getNome();
+	public Usuario buscar(int id) throws Exception {
+		UsuarioDaoImpl dao = new UsuarioDaoImpl();
+		Usuario usuario = new Usuario();
+		usuario.setId(id);
+		List<Usuario> find = dao.listar(usuario, null);
+		if(find.isEmpty()){
+			return null;
+		}
+		return find.get(0);
 	}
 	
 	@WebMethod
@@ -44,6 +48,6 @@ public class UsuarioWS {
 	public boolean criarUsuario(Usuario usuario) throws Exception{
 		UsuarioDaoImpl dao = new UsuarioDaoImpl();
 		return dao.salvar(usuario);
-	}
+	}	
 
 }

@@ -16,8 +16,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import br.org.furb.controller.AnuncioController;
 import br.org.furb.model.Sessao;
 import br.org.furb.model.Usuario;
+import br.org.furb.ws.usuario.cliente.Exception_Exception;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame {
@@ -25,6 +27,8 @@ public class FrmPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblUsuariologado;
 	private JButton btnNotificaes, btnMinhasOfertas, btnMeusDesejos, btnLogin;
+	private JList list;
+	private String[] itensListaAnuncios;
 
 	/**
 	 * Launch the application.
@@ -122,10 +126,9 @@ public class FrmPrincipal extends JFrame {
 		panel_2.setBounds(417, 58, 142, 311);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
-
-		String[] teste = { "Tenis Adidas R$50", "Notebook Apple R$10000",
-				"TESSSSSSSSSSSSSSEEEEE" };
-		JList list = new JList(teste);
+	
+		itensListaAnuncios = new String [] {"teste"};
+		list = new JList(itensListaAnuncios);
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBounds(10, 11, 122, 289);
 		panel_2.add(scroll);
@@ -144,6 +147,27 @@ public class FrmPrincipal extends JFrame {
 		btnMinhasOfertas.setVisible(usuarioLogado != null);
 		btnNotificaes.setVisible(usuarioLogado != null);
 
-		// TODO VERIFICAR ANUNCIOS...
+		// TODO VERIFICAR ANUNCIOS...		
+		buscaAnuncios(usuarioLogado);
+	}
+	
+	public void buscaAnuncios(Usuario usuario){		
+		String strTemp = null;
+		try {
+			if (usuario != null)
+				strTemp = new AnuncioController().getAnuncios(usuario.getId());
+			else
+				strTemp = new AnuncioController().getAnuncios(999);	
+		} catch (Exception_Exception e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
+		itensListaAnuncios = strTemp.split(";");		
+		list = new JList(itensListaAnuncios);
+		
+
 	}
 }
+

@@ -52,16 +52,21 @@ public interface UsuarioWS {
      * 
      * @param arg0
      * @return
-     *     returns java.lang.String
+     *     returns br.org.furb.ws.usuario.cliente.Usuario
+     * @throws Exception_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "buscar", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.Buscar")
     @ResponseWrapper(localName = "buscarResponse", targetNamespace = "http://usuario.ws.furb.org.br/", className = "br.org.furb.ws.usuario.cliente.BuscarResponse")
-    @Action(input = "http://usuario.ws.furb.org.br/UsuarioWS/buscarRequest", output = "http://usuario.ws.furb.org.br/UsuarioWS/buscarResponse")
-    public String buscar(
+    @Action(input = "http://usuario.ws.furb.org.br/UsuarioWS/buscarRequest", output = "http://usuario.ws.furb.org.br/UsuarioWS/buscarResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://usuario.ws.furb.org.br/UsuarioWS/buscar/Fault/Exception")
+    })
+    public Usuario buscar(
         @WebParam(name = "arg0", targetNamespace = "")
-        String arg0);
+        int arg0)
+        throws Exception_Exception
+    ;
 
     /**
      * 

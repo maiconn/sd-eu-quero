@@ -4,13 +4,14 @@ import br.org.furb.controller.dao.util.MongoDBObject;
 
 @SuppressWarnings("serial")
 public class Usuario extends MongoDBObject {
-	
+		
 	private int id;
 	private String nome;
 	private String email;
 	private String senha;
 	private String telefone;
 	private int cep;
+	private String gostos;
 	
 	public int getId() {
 		return id;
@@ -47,8 +48,12 @@ public class Usuario extends MongoDBObject {
 	}
 	public void setCep(int cep) {
 		this.cep = cep;
+	}	
+	public String getGostos() {
+		return gostos;
 	}
-	
-	
+	public void setGostos(String gostos) {
+		this.gostos = gostos;
+	}	
 
 }

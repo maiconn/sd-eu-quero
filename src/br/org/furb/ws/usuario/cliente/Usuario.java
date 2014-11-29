@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="cep" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="gostos" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="nome" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="senha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "usuario", propOrder = {
     "cep",
     "email",
+    "gostos",
     "id",
     "nome",
     "senha",
@@ -45,6 +47,7 @@ public class Usuario
 
     protected int cep;
     protected String email;
+    protected String gostos;
     protected int id;
     protected String nome;
     protected String senha;
@@ -88,6 +91,30 @@ public class Usuario
      */
     public void setEmail(String value) {
         this.email = value;
+    }
+
+    /**
+     * Gets the value of the gostos property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getGostos() {
+        return gostos;
+    }
+
+    /**
+     * Sets the value of the gostos property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setGostos(String value) {
+        this.gostos = value;
     }
 
     /**

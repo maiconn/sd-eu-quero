@@ -13,14 +13,14 @@ import javax.xml.bind.annotation.XmlType;
 public class BuscarResponse {
 
     @XmlElement(name = "return", namespace = "")
-    private String _return;
+    private br.org.furb.model.Usuario _return;
 
     /**
      * 
      * @return
-     *     returns String
+     *     returns Usuario
      */
-    public String getReturn() {
+    public br.org.furb.model.Usuario getReturn() {
         return this._return;
     }
 
@@ -29,7 +29,7 @@ public class BuscarResponse {
      * @param _return
      *     the value for the _return property
      */
-    public void setReturn(String _return) {
+    public void setReturn(br.org.furb.model.Usuario _return) {
         this._return = _return;
     }
 

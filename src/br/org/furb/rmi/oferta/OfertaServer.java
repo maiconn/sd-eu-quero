@@ -24,6 +24,7 @@ public class OfertaServer extends UnicastRemoteObject implements OfertaRMI {
 	public static void main(String[] args) {
 		try {
 			OfertaServer obj = new OfertaServer();
+			System.out.println("Servidor RMI de OFERTAS startado...");
 			Naming.rebind("//" + Constantes.IP_RMI + "/Oferta", obj);
 		} catch (Exception ex) {
 			System.out.println("Exception: " + ex.getMessage());

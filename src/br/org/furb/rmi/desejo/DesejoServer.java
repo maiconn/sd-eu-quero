@@ -29,6 +29,7 @@ public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 	public static void main(String[] args) {
 	   try {
 	      DesejoServer obj = new DesejoServer();	      
+	      System.out.println("Servidor RMI de DESEJOS startado...");
 	      Naming.rebind("//" + Constantes.IP_RMI + "/DesejoRMI", obj);
 	   } catch (Exception ex) {
 	      System.out.println("Exception: " + ex.getMessage());

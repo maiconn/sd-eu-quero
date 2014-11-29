@@ -71,6 +71,21 @@ public class DesejoServer extends UnicastRemoteObject implements DesejoRMI{
 		}
 		return result;
 	}
+
+	@Override
+	public Desejo buscar(Desejo desejo) throws Exception {
+		return desejoDaoImpl.buscar(desejo);
+	}
+
+	@Override
+	public boolean excluir(Desejo desejo) throws Exception {
+		return desejoDaoImpl.excluir(desejo);
+	}
+
+	@Override
+	public boolean editar(Desejo desejo) throws Exception {
+		return desejoDaoImpl.editar(desejo);
+	}
 	
 
 }

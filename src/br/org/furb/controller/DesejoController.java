@@ -18,4 +18,16 @@ public class DesejoController {
 	public String carregarDesejos() throws Exception {
 		return new DesejoClient().getDesejoClient().carregarDesejos();
 	}
+	
+	public Desejo buscar(Desejo desejo) throws Exception {
+		return new DesejoClient().getDesejoClient().buscar(desejo);
+	}
+
+	public boolean excluir(Desejo desejo) throws Exception {
+		return new DesejoClient().getDesejoClient().excluir(desejo);
+	}
+	
+	public boolean editar(Desejo desejo) throws Exception {
+		return new DesejoClient().getDesejoClient().editar(desejo);
+	}
 }

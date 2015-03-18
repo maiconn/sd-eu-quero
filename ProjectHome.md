@@ -1,0 +1,1 @@
+Sistema com a função de que um usuário poderá criar um desejo que ele quer que aconteça, para um ofertante fazer uma proposta com o objetivo de realizar o desejo do criador.
